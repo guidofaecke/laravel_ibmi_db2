@@ -836,7 +836,7 @@ class DB2Grammar extends Grammar
      *
      * @param  mixed $value
      *
-     * @return string
+     * @return bool|Expression|float|int|string
      */
     protected function getDefaultValue($value)
     {
