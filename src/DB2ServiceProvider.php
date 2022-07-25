@@ -106,6 +106,7 @@ class DB2ServiceProvider extends ServiceProvider
      * Get the config path
      *
      * @return string
+     * @psalm-suppress UndefinedClass
      */
     protected function getConfigPath()
     {
