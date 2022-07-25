@@ -43,7 +43,7 @@ class DB2Connection extends Connection
      *
      * @return string
      */
-    public function getDefaultSchema()
+    public function getDefaultSchema(): string
     {
         return $this->defaultSchema;
     }
@@ -51,11 +51,11 @@ class DB2Connection extends Connection
     /**
      * Reset to default the current schema.
      *
-     * @return string
+     * @return bool
      */
-    public function resetCurrentSchema()
+    public function resetCurrentSchema(): bool
     {
-        $this->setCurrentSchema($this->getDefaultSchema());
+        return $this->setCurrentSchema($this->getDefaultSchema());
     }
 
     /**
@@ -63,11 +63,11 @@ class DB2Connection extends Connection
      *
      * @param $schema
      *
-     * @return string
+     * @return bool
      */
-    public function setCurrentSchema($schema)
+    public function setCurrentSchema($schema): bool
     {
-        $this->statement('SET SCHEMA ?', [strtoupper($schema)]);
+        return $this->statement('SET SCHEMA ?', [strtoupper($schema)]);
     }
 
     /**
@@ -75,19 +75,19 @@ class DB2Connection extends Connection
      *
      * @param $command
      *
-     * @return string
+     * @return bool
      */
-    public function executeCommand($command)
+    public function executeCommand($command): bool
     {
-        $this->statement('CALL QSYS2.QCMDEXC(?)', [$command]);
+        return $this->statement('CALL QSYS2.QCMDEXC(?)', [$command]);
     }
 
     /**
      * Get a schema builder instance for the connection.
      *
-     * @return \GuidoFaecke\DB2\Database\Schema\Builder
+     * @return Builder
      */
-    public function getSchemaBuilder()
+    public function getSchemaBuilder(): Builder
     {
         if (is_null($this->schemaGrammar)) {
             $this->useDefaultSchemaGrammar();
